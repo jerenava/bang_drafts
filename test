@@ -1,0 +1,99 @@
+/*
+CS 2314 DATA STRUCTURES - FALL 2019
+MARIO A. PITALUA RDZ.
+EXAMPLE : STACK DATA STRUCTURE, BASED ON AN ARRAY
+
+NOTE: COMPLETE THE INTERNAL DOCUMENTAION IF USED AS STARTING POINT FOR ANY ASSIGMENT
+*************************************************************************************
+*/
+
+//#include <stdio.h> 
+#include <stdlib.h> 
+#include <conio.h> 
+#include <iostream>
+using namespace std;
+
+#define MAX 3                   // MAX determine the number of items the STACK can hold.
+
+int st[MAX];					// Array to hold up to MAX stacked items
+int top=-1; 					// Reference to the TOP  of the STACK 
+void push(int st[], int val); 	// PUSH Operation
+int pop(int st[]); 				// POP  Operation  
+int peek(int st[]); 			// PEEK Operation
+void display(int st[]); 		// Aux. Function that Display the current state of the STACK
+
+int main(int argc, char *argv[]) 
+{           int val, option; 
+ do {  
+	cout << "STACK ADT, for INTEGER values!" << endl;
+	cout << endl << " *****MAIN MENU*****" << endl; 
+	cout << " 1. PUSH"    << endl; 
+	cout << " 2. POP"     << endl; 
+	cout << " 3. PEEK"    << endl; 
+	cout << " 4. DISPLAY" << endl; 
+	cout << " 5. EXIT"    << endl; 
+	cout << " Enter your option: " ; 
+	cin  >> option ; 
+	switch(option)  {  
+		case 1: cout << endl <<" Enter the number to be pushed on stack: " ; 
+				cin  >> val ; 
+				push(st, val); 
+				cout << endl;
+				break; 
+		case 2: val = pop(st); 
+				if(val != -1)   
+					cout << endl << " The value deleted from stack is: " << val ; 
+					cout << endl;
+				break; 
+		case 3: val = peek(st); 
+				if(val != -1)
+					cout << endl <<" The value stored at top of stack is: " << val ; 
+					cout << endl;
+				break; 
+		case 4:   display(st);
+				cout << endl;
+				break; 
+		} 
+	}while(option != 5); 
+	return 0; 
+ } 
+ 
+ void push(int st[], int val) 
+	{ if(top == MAX-1) 
+		{  cout<< endl  <<"STACK OVERFLOW" << endl; } 
+	  else 
+		{  top++; 
+		   st[top] = val; 
+		} 
+	} 
+	
+int pop(int st[]) 
+	{ 	int val; 
+		if(top == -1) 
+		   {  cout << endl << " STACK UNDERFLOW" << endl ; 
+		      return -1; 
+		   } 
+		else 
+		   { val = st[top]; 
+             top--; 
+             return val; 
+           }
+	} 
+
+int peek(int st[]) 
+	{ if(top == -1) 
+		{  cout << endl << " STACK IS EMPTY" << endl; 
+		return -1; } 
+	  else return (st[top]); 
+    }
+
+void display(int st[]) 
+	{ int i; 
+	  if(top == -1) cout << endl <<" STACK IS EMPTY" << endl ; 
+	  else {  
+		for(i=top; i>=0; i--)  
+			cout << endl  <<"    " << st[i] << endl  ;
+		} 
+	cout << " ----------- " << endl;
+	} 	
+
